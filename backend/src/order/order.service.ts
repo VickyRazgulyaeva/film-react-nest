@@ -53,7 +53,15 @@ export class OrderService {
       throw new ConflictException('Seat is already taken');
     }
 
-    await this.filmsRepository.bookSeats(filmId, sessionId, seats);
+    const bookedSession = await this.filmsRepository.bookSeats(
+      filmId,
+      sessionId,
+      seats,
+    );
+
+    if (!bookedSession) {
+      throw new ConflictException('Seat is already taken');
+    }
 
     return {
       total: dto.tickets.length,

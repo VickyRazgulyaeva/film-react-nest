@@ -1,0 +1,30 @@
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Film } from './film.entity';
+
+@Entity('schedules')
+export class Schedule {
+  @PrimaryColumn('uuid')
+  id: string;
+
+  @Column({ type: 'timestamptz' })
+  daytime: Date;
+
+  @Column()
+  hall: number;
+
+  @Column()
+  rows: number;
+
+  @Column()
+  seats: number;
+
+  @Column()
+  price: number;
+
+  @Column({ default: '' })
+  taken: string;
+
+  @ManyToOne(() => Film, (film) => film.schedule)
+  @JoinColumn({ name: 'filmId' })
+  film: Film;
+}

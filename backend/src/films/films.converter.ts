@@ -1,15 +1,31 @@
-import { Film } from './schemas/film.schema';
+import { Film } from './entities/film.entity';
+import { Schedule } from './entities/schedule.entity';
 import { FilmDto, ScheduleDto } from './dto/film.dto';
 
-export function scheduleToDto(schedule): ScheduleDto {
+function parseTaken(value: string | string[] | null): string[] {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  return value.split(',').filter(Boolean);
+}
+
+export function scheduleToDto(schedule: Schedule): ScheduleDto {
   return {
     id: schedule.id,
-    daytime: schedule.daytime,
+    daytime:
+      schedule.daytime instanceof Date
+        ? schedule.daytime.toISOString()
+        : schedule.daytime,
     hall: schedule.hall,
     rows: schedule.rows,
     seats: schedule.seats,
     price: schedule.price,
-    taken: schedule.taken,
+    taken: parseTaken(schedule.taken),
   };
 }
 
