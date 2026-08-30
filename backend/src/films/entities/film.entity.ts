@@ -24,10 +24,10 @@ export class Film {
   @Column()
   title: string;
 
-  @Column('text')
+  @Column()
   about: string;
 
-  @Column('text')
+  @Column()
   description: string;
 
   @OneToMany(() => Schedule, (schedule) => schedule.film)

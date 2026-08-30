@@ -17,10 +17,7 @@ function parseTaken(value: string | string[] | null): string[] {
 export function scheduleToDto(schedule: Schedule): ScheduleDto {
   return {
     id: schedule.id,
-    daytime:
-      schedule.daytime instanceof Date
-        ? schedule.daytime.toISOString()
-        : schedule.daytime,
+    daytime: schedule.daytime,
     hall: schedule.hall,
     rows: schedule.rows,
     seats: schedule.seats,

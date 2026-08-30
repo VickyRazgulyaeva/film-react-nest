@@ -18,11 +18,14 @@ export class Schedule {
   @Column()
   seats: number;
 
-  @Column()
+  @Column('float')
   price: number;
 
-  @Column({ default: '' })
+  @Column('text')
   taken: string;
+
+  @Column({ type: 'uuid' })
+  filmId: string;
 
   @ManyToOne(() => Film, (film) => film.schedule)
   @JoinColumn({ name: 'filmId' })
