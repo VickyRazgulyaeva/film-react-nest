@@ -38,8 +38,3 @@ jobs:
       run: bash $DIR_TESTS/bin/start_project.sh
     - name: Run tests
       run: bash $DIR_TESTS/bin/endpoints.sh
-      run: set -eu && git clone --depth 1 $REP_TESTS $DIR_TESTS
-    - name: Start project
-      run: bash $DIR_TESTS/bin/start_project.sh
-    - name: Run tests
-      run: bash $DIR_TESTS/bin/endpoints.sh
