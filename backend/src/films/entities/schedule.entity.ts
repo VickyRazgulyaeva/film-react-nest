@@ -6,8 +6,8 @@ export class Schedule {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column({ type: 'timestamptz' })
-  daytime: Date;
+  @Column()
+  daytime: string;
 
   @Column()
   hall: number;
