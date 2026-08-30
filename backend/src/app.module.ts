@@ -27,7 +27,7 @@ import { OrderService } from './order/order.service';
         username: configService.get<string>('DATABASE_USERNAME'),
         password: configService.get<string>('DATABASE_PASSWORD') || '',
         entities: [Film, Schedule],
-        synchronize: true,
+        synchronize: false,
       }),
     }),
     TypeOrmModule.forFeature([Film, Schedule]),
