@@ -22,14 +22,24 @@ import { OrderService } from './order/order.service';
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        url: configService.get<string>('DATABASE_URL'),
-        username: configService.get<string>('DATABASE_USERNAME'),
-        password: configService.get<string>('DATABASE_PASSWORD') || '',
-        entities: [Film, Schedule],
-        synchronize: false,
-      }),
+      useFactory: (configService: ConfigService) => {
+        const databaseUrl = new URL(
+          configService.get<string>('DATABASE_URL') ?? 'postgres://localhost:5432/films',
+        );
+
+        return {
+          type: 'postgres',
+          host: databaseUrl.hostname,
+          port: Number(databaseUrl.port || 5432),
+          database: databaseUrl.pathname.slice(1),
+          username:
+            configService.get<string>('DATABASE_USERNAME') || databaseUrl.username,
+          password:
+            configService.get<string>('DATABASE_PASSWORD') || databaseUrl.password,
+          entities: [Film, Schedule],
+          synchronize: false,
+        };
+      },
     }),
     TypeOrmModule.forFeature([Film, Schedule]),
     ServeStaticModule.forRoot({
