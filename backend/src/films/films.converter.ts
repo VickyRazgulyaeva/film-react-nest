@@ -31,7 +31,7 @@ export function filmToDto(film: Film): FilmDto {
     id: film.id,
     rating: film.rating,
     director: film.director,
-    tags: film.tags,
+    tags: parseTags(film.tags),
     image: film.image,
     cover: film.cover,
     title: film.title,
@@ -39,4 +39,19 @@ export function filmToDto(film: Film): FilmDto {
     description: film.description,
     schedule: film.schedule.map(scheduleToDto),
   };
+}
+
+function parseTags(value: string | string[] | null): string[] {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  return value
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean);
 }

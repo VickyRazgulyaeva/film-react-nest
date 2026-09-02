@@ -24,7 +24,8 @@ import { OrderService } from './order/order.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const databaseUrl = new URL(
-          configService.get<string>('DATABASE_URL') ?? 'postgres://localhost:5432/films',
+          configService.get<string>('DATABASE_URL') ??
+            'postgres://localhost:5432/films',
         );
 
         return {
@@ -33,9 +34,11 @@ import { OrderService } from './order/order.service';
           port: Number(databaseUrl.port || 5432),
           database: databaseUrl.pathname.slice(1),
           username:
-            configService.get<string>('DATABASE_USERNAME') || databaseUrl.username,
+            configService.get<string>('DATABASE_USERNAME') ||
+            databaseUrl.username,
           password:
-            configService.get<string>('DATABASE_PASSWORD') || databaseUrl.password,
+            configService.get<string>('DATABASE_PASSWORD') ||
+            databaseUrl.password,
           entities: [Film, Schedule],
           synchronize: false,
         };
