@@ -21,8 +21,8 @@ export class Schedule {
   @Column('float')
   price: number;
 
-  @Column('text')
-  taken: string;
+  @Column('simple-array', { default: '' })
+  taken: string[];
 
   @Column({ type: 'uuid' })
   filmId: string;

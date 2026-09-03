@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import {
   BadRequestException,
   ConflictException,
@@ -47,7 +48,8 @@ export class OrderService {
       throw new NotFoundException('Session not found');
     }
 
-    const alreadyTaken = seats.some((seat) => session.taken.includes(seat));
+    const taken = session.taken ?? [];
+    const alreadyTaken = seats.some((seat) => taken.includes(seat));
 
     if (alreadyTaken) {
       throw new ConflictException('Seat is already taken');
@@ -65,7 +67,10 @@ export class OrderService {
 
     return {
       total: dto.tickets.length,
-      items: dto.tickets,
+      items: dto.tickets.map((ticket) => ({
+        id: randomUUID(),
+        ...ticket,
+      })),
     };
   }
 }

@@ -50,16 +50,14 @@ export class FilmsRepository {
         return null;
       }
 
-      const alreadyTaken = seats.some((seat) => schedule.taken.includes(seat));
+      const taken = schedule.taken ?? [];
+      const alreadyTaken = seats.some((seat) => taken.includes(seat));
 
       if (alreadyTaken) {
         return null;
       }
 
-      const taken = schedule.taken
-        ? schedule.taken.split(',').filter(Boolean)
-        : [];
-      schedule.taken = [...taken, ...seats].join(',');
+      schedule.taken = [...taken, ...seats];
 
       return manager.getRepository(Schedule).save(schedule);
     });
