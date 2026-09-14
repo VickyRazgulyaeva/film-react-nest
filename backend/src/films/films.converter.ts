@@ -1,7 +1,8 @@
-import { Film } from './schemas/film.schema';
+import { Film } from './entities/film.entity';
+import { Schedule } from './entities/schedule.entity';
 import { FilmDto, ScheduleDto } from './dto/film.dto';
 
-export function scheduleToDto(schedule): ScheduleDto {
+export function scheduleToDto(schedule: Schedule): ScheduleDto {
   return {
     id: schedule.id,
     daytime: schedule.daytime,
@@ -9,7 +10,7 @@ export function scheduleToDto(schedule): ScheduleDto {
     rows: schedule.rows,
     seats: schedule.seats,
     price: schedule.price,
-    taken: schedule.taken,
+    taken: schedule.taken ?? [],
   };
 }
 
@@ -18,7 +19,7 @@ export function filmToDto(film: Film): FilmDto {
     id: film.id,
     rating: film.rating,
     director: film.director,
-    tags: film.tags,
+    tags: film.tags ?? [],
     image: film.image,
     cover: film.cover,
     title: film.title,
