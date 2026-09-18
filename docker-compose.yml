@@ -1,15 +1,11 @@
 services:
   frontend:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-frontend:latest
-    build:
-      context: ./frontend
     volumes:
       - frontend-dist:/frontend-dist
 
   backend:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-backend:latest
-    build:
-      context: ./backend
     environment:
       DATABASE_URL: postgres://film:film@postgres:5432/film
       DATABASE_USERNAME: film
@@ -21,8 +17,6 @@ services:
 
   nginx:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-nginx:latest
-    build:
-      context: ./nginx
     depends_on:
       - frontend
       - backend
