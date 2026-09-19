@@ -71,6 +71,8 @@ describe('OrderService', () => {
         {
           film: filmId,
           session: sessionId,
+          filmId,
+          sessionId,
           row: 1,
           seat: 1,
           price: 350,

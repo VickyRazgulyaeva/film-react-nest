@@ -82,6 +82,8 @@ export class OrderService {
       items: dto.tickets.map((ticket) => ({
         film: ticket.film,
         session: ticket.session,
+        filmId: ticket.film,
+        sessionId: ticket.session,
         row: ticket.row,
         seat: ticket.seat,
         price: ticket.price,
