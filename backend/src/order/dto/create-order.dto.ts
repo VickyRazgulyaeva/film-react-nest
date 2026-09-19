@@ -20,6 +20,10 @@ export class OrderTicketDto {
   @IsUUID()
   session: string;
 
+  @IsString()
+  @IsNotEmpty()
+  daytime: string;
+
   @Type(() => Number)
   @IsInt()
   @Min(1)

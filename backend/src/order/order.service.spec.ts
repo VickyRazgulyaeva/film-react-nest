@@ -36,6 +36,7 @@ describe('OrderService', () => {
       {
         film: filmId,
         session: sessionId,
+        daytime: '2024-06-28T10:00:53+03:00',
         row: 1,
         seat: 1,
         price: 350,
@@ -73,6 +74,7 @@ describe('OrderService', () => {
           session: sessionId,
           filmId,
           sessionId,
+          daytime: '2024-06-28T10:00:53+03:00',
           row: 1,
           seat: 1,
           price: 350,

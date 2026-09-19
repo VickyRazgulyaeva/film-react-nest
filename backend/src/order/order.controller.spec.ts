@@ -24,6 +24,7 @@ describe('OrderController', () => {
       {
         film: '5b70cb1a-61c9-47b1-b207-31f9e89087ff',
         session: '793009d6-030c-4dd4-8d13-9ba500724b38',
+        daytime: '2024-06-28T10:00:53+03:00',
         row: 1,
         seat: 1,
         price: 350,
@@ -71,6 +72,7 @@ describe('OrderController', () => {
           session: validDto.tickets[0].session,
           filmId: validDto.tickets[0].film,
           sessionId: validDto.tickets[0].session,
+          daytime: validDto.tickets[0].daytime,
           row: validDto.tickets[0].row,
           seat: validDto.tickets[0].seat,
           price: validDto.tickets[0].price,

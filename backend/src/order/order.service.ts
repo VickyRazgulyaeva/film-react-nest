@@ -84,6 +84,7 @@ export class OrderService {
         session: ticket.session,
         filmId: ticket.film,
         sessionId: ticket.session,
+        daytime: ticket.daytime,
         row: ticket.row,
         seat: ticket.seat,
         price: ticket.price,
