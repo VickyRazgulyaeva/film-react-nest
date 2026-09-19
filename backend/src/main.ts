@@ -12,7 +12,13 @@ async function bootstrap() {
   app.setGlobalPrefix('api/afisha');
   app.enableCors();
   app.useLogger(new TskvLogger());
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
   await app.listen(3000);
 }
 bootstrap();
