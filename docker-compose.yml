@@ -6,14 +6,16 @@ services:
 
   backend:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-backend:latest
+    build:
+      context: ./backend
     environment:
       DATABASE_URL: postgres://film:film@postgres:5432/film
       DATABASE_USERNAME: film
       DATABASE_PASSWORD: film
     depends_on:
       - postgres
-    expose:
-      - "3000"
+    ports:
+  - "3000:3000"
 
   nginx:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-nginx:latest
