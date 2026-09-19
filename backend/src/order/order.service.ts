@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+// import { randomUUID } from 'node:crypto';
 import {
   BadRequestException,
   ConflictException,
@@ -80,8 +80,11 @@ export class OrderService {
     return {
       total: dto.tickets.length,
       items: dto.tickets.map((ticket) => ({
-        id: randomUUID(),
-        ...ticket,
+        film: ticket.film,
+        session: ticket.session,
+        row: ticket.row,
+        seat: ticket.seat,
+        price: ticket.price,
       })),
     };
   }

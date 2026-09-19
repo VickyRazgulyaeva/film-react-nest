@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+// import { randomUUID } from 'node:crypto';
 import {
   BadRequestException,
   ConflictException,
@@ -67,7 +67,6 @@ describe('OrderController', () => {
       total: 1,
       items: [
         {
-          id: randomUUID(),
           ...validDto.tickets[0],
         },
       ],
