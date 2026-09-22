@@ -15,7 +15,7 @@ services:
     depends_on:
       - postgres
     ports:
-  - "3000:3000"
+      - "3000:3000"
 
   nginx:
     image: ghcr.io/vickyrazgulyaeva/film-react-nest-nginx:latest

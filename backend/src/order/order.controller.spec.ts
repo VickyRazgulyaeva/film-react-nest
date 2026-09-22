@@ -68,10 +68,9 @@ describe('OrderController', () => {
       total: 1,
       items: [
         {
+          id: '11111111-1111-1111-1111-111111111111',
           film: validDto.tickets[0].film,
           session: validDto.tickets[0].session,
-          filmId: validDto.tickets[0].film,
-          sessionId: validDto.tickets[0].session,
           daytime: validDto.tickets[0].daytime,
           row: validDto.tickets[0].row,
           seat: validDto.tickets[0].seat,

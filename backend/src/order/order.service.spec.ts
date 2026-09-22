@@ -70,10 +70,9 @@ describe('OrderService', () => {
       total: 1,
       items: [
         {
+          id: expect.any(String),
           film: filmId,
           session: sessionId,
-          filmId,
-          sessionId,
           daytime: '2024-06-28T10:00:53+03:00',
           row: 1,
           seat: 1,
