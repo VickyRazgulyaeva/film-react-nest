@@ -1,0 +1,56 @@
+services:
+  frontend:
+    image: ghcr.io/vickyrazgulyaeva/film-react-nest-frontend:latest
+    volumes:
+      - frontend-dist:/frontend-dist
+
+  backend:
+    image: ghcr.io/vickyrazgulyaeva/film-react-nest-backend:latest
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: postgres://film:film@postgres:5432/film
+      DATABASE_USERNAME: film
+      DATABASE_PASSWORD: film
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: ghcr.io/vickyrazgulyaeva/film-react-nest-nginx:latest
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - frontend-dist:/usr/share/nginx/html:ro
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: film
+      POSTGRES_USER: film
+      POSTGRES_PASSWORD: film
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.ru
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  frontend-dist:
+  postgres-data:
+  pgadmin-data:

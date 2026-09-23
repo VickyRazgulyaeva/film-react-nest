@@ -48,6 +48,18 @@ export class OrderService {
       throw new NotFoundException('Session not found');
     }
 
+    const hasSeatOutsideHall = dto.tickets.some(
+      (ticket) =>
+        ticket.row < 1 ||
+        ticket.row > session.rows ||
+        ticket.seat < 1 ||
+        ticket.seat > session.seats,
+    );
+
+    if (hasSeatOutsideHall) {
+      throw new BadRequestException('Seat is outside of hall bounds');
+    }
+
     const taken = session.taken ?? [];
     const alreadyTaken = seats.some((seat) => taken.includes(seat));
 
@@ -69,7 +81,12 @@ export class OrderService {
       total: dto.tickets.length,
       items: dto.tickets.map((ticket) => ({
         id: randomUUID(),
-        ...ticket,
+        film: ticket.film,
+        session: ticket.session,
+        daytime: ticket.daytime,
+        row: ticket.row,
+        seat: ticket.seat,
+        price: ticket.price,
       })),
     };
   }
